@@ -14,7 +14,7 @@ const s3client = new S3Client({
 
 async function getObjectURL(key){
     const command = new GetObjectCommand({
-        Bucket:"s3-practice-private",
+         Bucket:"s3-practice-private",                       // The Bucket "s3-practice-private" is private but the user Prabhakar is assigned to group "S3-Test" which has permission of Amazon S3 thats why we access the URL and we have also craeted the secret key and access key of the user. If the new IAM user belongs to the same AWS account and has been granted permissions to access the S3 bucket, then yes, they should be able to see and interact with the bucket and its contents.
         Key:key
     })
     const url = await getSignedUrl(s3client,command);
