@@ -59,6 +59,6 @@ async function init(){
    
    // listObjects()
 
-   deleteObject();
+   //deleteObject();
 }
 init();
