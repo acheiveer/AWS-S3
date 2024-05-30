@@ -1,4 +1,4 @@
-const {S3Client, GetObjectCommand, PutObjectCommand, ListObjectsV2Command} = require("@aws-sdk/client-s3")
+const {S3Client, GetObjectCommand, PutObjectCommand, ListObjectsV2Command, DeleteObjectCommand} = require("@aws-sdk/client-s3")
 const {getSignedUrl} = require("@aws-sdk/s3-request-presigner");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -42,10 +42,23 @@ async function listObjects(){
     console.log(result)
 }
 
+async function deleteObject(){
+    const command = new DeleteObjectCommand({                   //This function interacts with AWS S3 to delete a specific object from a bucket and logs the response.
+        Bucket: "s3-practice-private",
+        Key:"uploads/user-uploads/image-1717075065328.jpeg"
+    })
+    const result = await s3client.send(command);
+    console.log(result);
+}
+
+
 async function init(){
     // console.log("URL for s3-practice-private",await getObjectURL("Untitled (4).jpg"))                         // this is the key name of the file that we try to reveive through url
    
     // console.log("URL for uploading", await PutObject(`image-${Date.now()}.jpeg`,'image/jpeg'))                   // "image-${Date.now()}.jpeg" is the file name that we give to file during  uploading. "image/jpeg" is the type of file.   after running thsi we get a URL and to test go to postman paste the url and add put request. then add the file that we have to upload anss then run.
-   listObjects()
+   
+   // listObjects()
+
+   deleteObject();
 }
 init();
